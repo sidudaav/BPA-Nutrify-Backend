@@ -21,8 +21,8 @@ router.post('/register', async (req, res) => {
 // Handle login
 // Return a JSON Web Token
 router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username: username });
+    const { email, password } = req.body;
+    const user = await User.findOne({ email: email });
 
     if (!user) {
         return res.json(null);
