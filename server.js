@@ -22,10 +22,12 @@ const db = initializeDB();
 const usersRouter = require('./routes/users.routes');
 const authRouter = require('./routes/auth.routes');
 const mealsRouter = require('./routes/meals.routes');
+const foodsRouter = require('./routes/foods.routes');
 
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/meals', mealsRouter);
+app.use('/api/foods', foodsRouter);
 
 // Run server on port
 const PORT = process.env.PORT || 5000;
