@@ -14,6 +14,12 @@ const userSchema = mongoose.Schema(
             type: String,
             required: true,
         },
+        meals: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Meal',
+            },
+        ],
     },
     {
         timestamps: true,
