@@ -1,5 +1,36 @@
 const router = require('express').Router();
 const User = require('../models/user.model');
+const Meal = require('../models/meal.model');
+const Food = require('../models/food.model');
+
+router.post('/:id/add-meal', async (req, res) => {
+    const { name, foods } = req.body;
+
+    let mealFoodIds = [];
+
+    for (idx in foods) {
+        food = foods[idx];
+        const newFood = await Food.create({
+            ...food,
+        });
+        await newFood.save();
+        mealFoodIds.push(newFood._id);
+    }
+
+    const newMeal = await Meal.create({
+        name,
+        foods: mealFoodIds,
+    });
+
+    await newMeal.save();
+
+    let user = await User.findById(req.params.id);
+
+    user.meals.push(newMeal._id);
+    await user.save();
+
+    res.json(newMeal);
+});
 
 // GENERAL API ROUTES
 
@@ -17,7 +48,6 @@ router.delete('/', async (req, res) => {
 
 // Get a user with a specific ID
 router.get('/:id', async (req, res) => {
-    console.log(req.params.id);
     const user = await User.findById(req.params.id);
     res.json(user);
 });
