@@ -99,6 +99,7 @@ router.post('/login', async (req, res) => {
             _id: user._id,
             email: user.email,
             firstName: user.firstName,
+            meals: user.meals,
         },
     };
 
@@ -117,6 +118,7 @@ router.post('/login', async (req, res) => {
             _id: user._id,
             email: user.email,
             firstName: user.firstName,
+            meals: user.meals,
         },
     });
 });
