@@ -1,23 +1,19 @@
 const router = require('express').Router();
 const User = require('../models/user.model');
-const Meal = require('../models/meal.model');
 
 router.post('/:id/add-meal', async (req, res) => {
     const { name, foods } = req.body;
 
-    const newMeal = await Meal.create({
+    let user = await User.findById(req.params.id);
+
+    user.meals.push({
         name,
         foods,
     });
 
-    await newMeal.save();
-
-    let user = await User.findById(req.params.id);
-
-    user.meals.push(newMeal._id);
     await user.save();
 
-    res.json(newMeal);
+    res.json(user);
 });
 
 // GENERAL API ROUTES
