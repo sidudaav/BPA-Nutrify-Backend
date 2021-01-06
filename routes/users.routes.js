@@ -2,13 +2,14 @@ const router = require('express').Router();
 const User = require('../models/user.model');
 
 router.post('/:id/add-meal', async (req, res) => {
-    const { name, foods } = req.body;
+    const { name, foods, date } = req.body;
 
     let user = await User.findById(req.params.id);
 
     user.meals.push({
         name,
         foods,
+        date,
     });
 
     await user.save();

@@ -95,12 +95,7 @@ router.post('/login', async (req, res) => {
     }
 
     const payload = {
-        user: {
-            _id: user._id,
-            email: user.email,
-            firstName: user.firstName,
-            meals: user.meals,
-        },
+        user,
     };
 
     const accessToken = jwt.sign(
@@ -114,12 +109,7 @@ router.post('/login', async (req, res) => {
 
     res.json({
         jwt: accessToken,
-        user: {
-            _id: user._id,
-            email: user.email,
-            firstName: user.firstName,
-            meals: user.meals,
-        },
+        user,
     });
 });
 

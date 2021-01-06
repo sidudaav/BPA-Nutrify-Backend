@@ -44,8 +44,16 @@ const userSchema = mongoose.Schema(
                         },
                     },
                 ],
+                date: {
+                    type: Date,
+                    default: new Date().toISOString(),
+                },
             },
         ],
+        calorieGoal: {
+            type: Number,
+            default: 2000,
+        },
     },
     {
         timestamps: true,
